@@ -1,0 +1,120 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 20px;
+}
+
+.jumbotron p {
+    font-size: initial;
+}
+
+form fieldset {
+    margin-top: 30px;
+}
+
+.jumbotron h2 {
+    margin-top: 0;
+}
+
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+    color: goldenrod;
+}
+
+.table-striped th {
+    color: goldenrod;
+    vertical-align: bottom !important;
+}
+
+.table-striped td {
+    vertical-align: middle !important;
+}
+
+    .table-striped td.alwaysShow {
+        min-width: 90px;
+    }
+
+/* Set width on the form input elements since they're 100% wide by default */
+/*------------------------------------- PC/TABLET -------------------------------------*/
+@media screen and (min-width: 768px) {
+    input, select, textarea {
+        max-width: 300px;
+    }
+
+    dd {
+        margin-bottom: 15px;
+    }
+
+    .table-striped td.alwaysShow {
+        min-width: 90px;
+    }
+
+    .related {
+        padding: 10px;
+        background-color: #272b30;
+        border-radius: 6px;
+    }
+}
+
+/*------------------------------------- MOBILE -------------------------------------*/
+
+@media screen and (max-width: 767px) {
+    .body-content {
+        margin-top: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .jumbotron {
+        padding-top: 10px;
+    }
+
+    .container .jumbotron, .container-fluid .jumbotron {
+        border-radius: 0;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    .table-striped th:first-child, .table-striped td:first-child, .table-striped th:last-child, .table-striped td:last-child {
+        display: table-cell;
+    }
+
+    .table-striped td.alwaysShow {
+        min-width: 100px;
+    }
+
+    .dataTables_length .form-control {
+        width: inherit;
+    }
+
+    dd {
+        margin-bottom: 15px;
+    }
+
+    .btn-primary {
+        width: 100%;
+    }
+
+    footer {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+/*---------------------------- Bootstrap Changes -------------------*/
+
+.radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
+    margin-left: auto;
+}

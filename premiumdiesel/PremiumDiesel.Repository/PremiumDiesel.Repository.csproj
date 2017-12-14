@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9F38ED71-0991-4961-BA82-755157C6A265}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PremiumDiesel.Repository</RootNamespace>
+    <AssemblyName>PremiumDiesel.Repository</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Repositories\ClientCustomers\ClientCustomerHistoryRepository.cs" />
+    <Compile Include="Repositories\ClientCustomers\ClientCustomerRepository.cs" />
+    <Compile Include="Repositories\ClientCustomers\IClientCustomerHistoryRepository.cs" />
+    <Compile Include="Repositories\ClientCustomers\IClientCustomerRepository.cs" />
+    <Compile Include="Repositories\Clients\ClientHistoryRepository.cs" />
+    <Compile Include="Repositories\Clients\ClientRepository.cs" />
+    <Compile Include="Repositories\Clients\IClienHistortRepository.cs" />
+    <Compile Include="Repositories\Clients\IClientRepository.cs" />
+    <Compile Include="Repositories\ClientUsers\ClientUserHistoryRepository.cs" />
+    <Compile Include="Repositories\ClientUsers\IClientUserHistoryRepository.cs" />
+    <Compile Include="Repositories\ClientUsers\IClientUserRepository.cs" />
+    <Compile Include="Repositories\ClientUsers\ClientUserRepository.cs" />
+    <Compile Include="Repositories\CustomerLocations\CustomerLocationHistoryRepository.cs" />
+    <Compile Include="Repositories\CustomerLocations\CustomerLocationRepository.cs" />
+    <Compile Include="Repositories\CustomerLocations\ICustomerLocationHistoryRepository.cs" />
+    <Compile Include="Repositories\CustomerLocations\ICustomerLocationRepository.cs" />
+    <Compile Include="Repositories\Customers\CustomerHistoryRepository.cs" />
+    <Compile Include="Repositories\Customers\CustomerRepository.cs" />
+    <Compile Include="Repositories\Customers\ICustomerHistoryRepository.cs" />
+    <Compile Include="Repositories\Customers\ICustomerRepository.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\Products\IProductHistoryRepository.cs" />
+    <Compile Include="Repositories\Products\ProductRepositoryHistory.cs" />
+    <Compile Include="Repositories\Products\ProductRepository.cs" />
+    <Compile Include="Repositories\Products\IProductRepository.cs" />
+    <Compile Include="Repositories\WorkOrders\IWorkOrderHistoryRepository.cs" />
+    <Compile Include="Repositories\WorkOrders\IWorkOrderRepository.cs" />
+    <Compile Include="Repositories\WorkOrders\WorkOrderRepository.cs" />
+    <Compile Include="Repositories\WorkOrders\WorkOrderRepositoryHistory.cs" />
+    <Compile Include="UnitOfWork\IUnitOfWork.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="UnitOfWork\UnitOfWork.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PremiumDiesel.Model\PremiumDiesel.Model.csproj">
+      <Project>{6c0a5304-a3e8-4d51-a5b8-347d018b000d}</Project>
+      <Name>PremiumDiesel.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

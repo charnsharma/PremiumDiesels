@@ -1,0 +1,35 @@
+﻿@model PremiumDiesel.Model.DTOs.ProductDTO
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Product Details</h2>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+</p>

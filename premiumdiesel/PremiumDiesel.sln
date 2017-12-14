@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PremiumDiesel.Web", "PremiumDiesel.Web\PremiumDiesel.Web.csproj", "{083B28DC-D8BA-4206-98C8-0111B60C96C4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{64509FAE-258E-4FCF-AA3E-06295B21E0F2} = {64509FAE-258E-4FCF-AA3E-06295B21E0F2}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PremiumDiesel.Web.Tests", "PremiumDiesel.Web.Tests\PremiumDiesel.Web.Tests.csproj", "{0FCF1599-D133-42CA-9E19-954D55DA8AF5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PremiumDiesel.Repository", "PremiumDiesel.Repository\PremiumDiesel.Repository.csproj", "{9F38ED71-0991-4961-BA82-755157C6A265}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PremiumDiesel.Service", "PremiumDiesel.Service\PremiumDiesel.Service.csproj", "{64509FAE-258E-4FCF-AA3E-06295B21E0F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PremiumDiesel.Model", "PremiumDiesel.Model\PremiumDiesel.Model.csproj", "{6C0A5304-A3E8-4D51-A5B8-347D018B000D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E20171A7-0DAE-4A36-9324-D98869503320}"
+	ProjectSection(SolutionItems) = preProject
+		Bugs.txt = Bugs.txt
+		TODO.txt = TODO.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{083B28DC-D8BA-4206-98C8-0111B60C96C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{083B28DC-D8BA-4206-98C8-0111B60C96C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{083B28DC-D8BA-4206-98C8-0111B60C96C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{083B28DC-D8BA-4206-98C8-0111B60C96C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FCF1599-D133-42CA-9E19-954D55DA8AF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FCF1599-D133-42CA-9E19-954D55DA8AF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FCF1599-D133-42CA-9E19-954D55DA8AF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FCF1599-D133-42CA-9E19-954D55DA8AF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F38ED71-0991-4961-BA82-755157C6A265}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F38ED71-0991-4961-BA82-755157C6A265}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F38ED71-0991-4961-BA82-755157C6A265}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F38ED71-0991-4961-BA82-755157C6A265}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64509FAE-258E-4FCF-AA3E-06295B21E0F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64509FAE-258E-4FCF-AA3E-06295B21E0F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64509FAE-258E-4FCF-AA3E-06295B21E0F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64509FAE-258E-4FCF-AA3E-06295B21E0F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C0A5304-A3E8-4D51-A5B8-347D018B000D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C0A5304-A3E8-4D51-A5B8-347D018B000D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C0A5304-A3E8-4D51-A5B8-347D018B000D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C0A5304-A3E8-4D51-A5B8-347D018B000D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

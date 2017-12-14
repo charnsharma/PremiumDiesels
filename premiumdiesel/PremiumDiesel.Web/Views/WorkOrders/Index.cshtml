@@ -1,0 +1,148 @@
+﻿@model IEnumerable<PremiumDiesel.Model.DTOs.WorkOrderDTO>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Work Orders</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<hr />
+<div class="table-responsive">
+    <table id="workOrdersTable" class="table table-striped table-hover ">
+        <thead>
+            <tr>
+                <th>
+                    Customer @*@Html.DisplayNameFor(model => model.Customer.Name)*@
+                </th>
+                <th>
+                    Location @*@Html.DisplayNameFor(model => model.Location.Name)*@
+                </th>
+                <th>
+                    Product @*@Html.DisplayNameFor(model => model.Product.Name)*@
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Notes)
+                    </th>*@
+                <th>
+                    Assigned To @*@Html.DisplayNameFor(model => model.AssignedToUser.Email)*@
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DueDate)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var workOrder in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => workOrder.Customer.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => workOrder.Location.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => workOrder.Product.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => workOrder.Quantity)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => workOrder.Notes)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => workOrder.AssignedToUser.Email)
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => workOrder.DueDate.Value.ToString("MMM d, yyyy"))*@
+                        @if (workOrder.DueDate.HasValue)
+                        {
+                            @workOrder.DueDate.Value.ToString("MMM d, yyyy")
+                        }
+                    </td>
+                    <td class="text-right alwaysShow">
+                        @using PremiumDiesel.Web.HtmlHelperExtensions
+
+                        @Ajax.FaViewLinkButton("Details", "WorkOrders", workOrder.Id)
+                        @Ajax.FaEditLinkButton("Edit", "WorkOrders", workOrder.Id)
+                        @Ajax.FaDeleteLinkButton(workOrder.Id)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@if (Model.ToList().Count == 0)
+{
+    <div class="alert alert-dismissible alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h4>Warning!</h4>
+        <p>No work orders yet.</p>
+    </div>
+}
+
+@using PremiumDiesel.Model.Constants;
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+
+            $('#workOrdersTable').DataTable(@*{
+                ajax: {
+                    url: '@Api.Products.Delete',
+                    dataSrc: '',
+                },
+                columns: [
+                    {
+                        data: 'name',
+                        render: function (data, type, product) {
+                            var nameLink = @Html.ActionLink("productName", "Edit", new { id = "productId" }, null);
+                            nameLink = nameLink.replace('productName', product.name);
+                            nameLink = nameLink.replace('productId', product.id);
+                            return nameLink;
+                        }
+                    },
+                    {
+                        data: 'notes',
+                    },
+                    {
+                        data: 'actions',
+                        render: function (data, type, product) {
+                            var viewLinkButton = @Html.ActionLink("<span class='fa fa - eye'>", "Details", new { id = "productId" }, null);
+                            viewLinkButton = viewLinkButton.replace('productName', product.name);
+                            viewLinkButton = viewLinkButton.replace('productId', product.id);
+                            return viewLinkButton;
+                        }
+                    }
+                ]
+            }*@);
+
+            $('#workOrdersTable').on('click', '.js-delete', function () {
+                var button = $(this);
+                var workOrderId = button.attr('primaryKey');
+
+                bootbox.confirm('Are you sure you wish to delete this work order?', function(result) {
+                    if (result) {
+                        $.ajax({
+                            url: '@Api.WorkOrders.Delete' + workOrderId,
+                            method: "DELETE",
+                            success: function () {
+                                button.parents('tr').remove();
+                            }
+                        });
+                    }
+                });
+
+            });
+        });
+    </script>
+}

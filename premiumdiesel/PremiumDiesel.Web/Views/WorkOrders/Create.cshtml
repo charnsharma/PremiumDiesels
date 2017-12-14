@@ -1,0 +1,132 @@
+﻿@model PremiumDiesel.Model.DTOs.WorkOrderDTO
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>New Work Order</h2>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.CustomerId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.CustomerId, new SelectList(ViewBag.CustomerList, "Key", "Value"), "", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CustomerId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LocationId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.LocationId, new SelectList(ViewBag.LocationList, "Key", "Value"), "", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.LocationId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProductId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ProductId, new SelectList(ViewBag.ProductList, "Key", "Value"), "", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ProductId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DueDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DueDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DueDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AssignedToUserId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.AssignedToUserId, new SelectList(ViewBag.UserList, "Key", "Value"), "", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.AssignedToUserId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+@using PremiumDiesel.Model.Constants;
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+
+            $('#@Html.NameFor(model => model.CustomerId)').on("change", function () {
+
+                var customerId = $(this).val();
+
+                $.ajax({
+                    url: '@Api.CustomerLocations.GetByCustomer' + customerId,
+                    method: "GET",
+                    dataType: "json",
+                    success: function (response) {
+                        //var jsonResponse = $.parseJSON(response);
+                        reloadLocationList(response);
+                    },
+                    error: function (response) {
+                        //var json = $.parseJSON(response);
+                        bootbox.alert(response.error);
+                    }
+                });
+            });
+        });
+
+        function reloadLocationList(jsonResponse) {
+            try {
+                // clear the dropdown list
+                $('#@Html.NameFor(model => model.LocationId)').empty();
+
+                // add an empty option if there is more than one location
+                if (jsonResponse.length > 1)
+                    $('#@Html.NameFor(model => model.LocationId)').append(new Option('', null));
+
+                $.each(jsonResponse, function (index, customerLocation) {
+                    //console.log(customerLocation);
+                    //console.log('Adding ' + customerLocation.name);
+                    @*$('#@Html.NameFor(model => model.LocationId)').append($("<option />").val(customerLocation.id).text(customerLocation.name));*@
+                    $('#@Html.NameFor(model => model.LocationId)').append(new Option(customerLocation.name, customerLocation.id));
+                });
+            } catch (e) {
+                bootbox.alert(e.message);
+            }
+        }
+    </script>
+}

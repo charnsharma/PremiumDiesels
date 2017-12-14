@@ -1,0 +1,8 @@
+TODO LIST
+=========
+
+    - *** Every index page should only display ACTIVE items
+    - Update history tables only when some values have changed (right now it adds a new row when loading the edit page and saving it)
+    - *** Only one HO location should be allowed per customer
+    - Implement jQuery Datepicker
+    - *** Fix SeedWorkOrders: I can see work orders for customers that I don't have

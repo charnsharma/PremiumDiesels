@@ -1,0 +1,62 @@
+﻿<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Premium Diesel", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            @using Microsoft.AspNet.Identity
+            @using Microsoft.AspNet.Identity.Owin
+            @using PremiumDiesel.Model.Constants
+
+            @{
+                //var user = (C9JobManager.Models.ApplicationUser)null;
+
+                try
+                {
+                    //user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+                finally
+                {
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        @if (MyHelper.CurrentUser != null @*&& MyHelper.CurrentUser.IsActive*@ && MyHelper.UserIsAtLeast(UserRoles.User))
+                        {
+                            @*<li class="dropdown">
+                                    @Html.ActionLink("Settings", "")
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("Customers", "Index", "Customers")</li>
+                                        <li>@Html.ActionLink("Products", "Index", "Products")</li>
+                                    </ul>
+                                </li>*@
+                            <li>@Html.ActionLink("Customers", "Index", "Customers")</li>
+                            <li>@Html.ActionLink("Products", "Index", "Products")</li>
+                            <li>@Html.ActionLink("Work Orders", "Index", "WorkOrders")</li>
+
+                        }
+                        @if (MyHelper.UserIsAtLeast(UserRoles.SuperAdmin))
+                        {
+                            <li class="dropdown">
+                                @Html.ActionLink("Admin", "Index", "Admin")
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Clients", "Index", "Clients")</li>
+                                </ul>
+                            </li>
+                        }
+                        @*<li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+                    </ul>
+                }
+            }
+            @Html.Partial("_LoginPartial")
+        </div>
+    </div>
+</div>

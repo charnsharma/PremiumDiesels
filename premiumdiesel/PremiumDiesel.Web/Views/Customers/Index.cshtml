@@ -1,0 +1,112 @@
+﻿@model IEnumerable<PremiumDiesel.Web.Models.CustomerViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Customers</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<hr />
+<div class="table-responsive">
+    <table id="customersTable" class="table table-striped table-hover ">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.CustomerDTO.Name)</th>
+                <th>@Html.DisplayNameFor(model => model.CustomerDTO.MemberNumber)</th>
+                <th>@Html.DisplayNameFor(model => model.CustomerDTO.Phone)</th>
+                <th>Heah Office@*@Html.DisplayNameFor(model => model.HeadOfficeLocationDTO.Name)*@</th>
+                <th class="alwaysShow">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var fullCustomer in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(model => fullCustomer.CustomerDTO.Name)</td>
+                    <td>@Html.DisplayFor(model => fullCustomer.CustomerDTO.MemberNumber)</td>
+                    <td>@Html.DisplayFor(model => fullCustomer.CustomerDTO.Phone)</td>
+                    <td>@Html.DisplayFor(model => fullCustomer.HeadOfficeLocationDTO.Name)</td>
+                    <td class="text-right alwaysShow">
+                        @using PremiumDiesel.Web.HtmlHelperExtensions
+
+                        @Ajax.FaViewLinkButton("Details", "Customers", fullCustomer.CustomerDTO.Id)
+                        @Ajax.FaEditLinkButton("Edit", "Customers", fullCustomer.CustomerDTO.Id)
+                        @Ajax.FaDeleteLinkButton(fullCustomer.CustomerDTO.Id)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@if (Model.ToList().Count == 0)
+{
+    <div class="alert alert-dismissible alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h4>Warning!</h4>
+        <p>No customers yet.</p>
+    </div>
+
+}
+
+    @*----------------------------------------------------- SCRIPTS -----------------------------------------------------*@
+
+    @using PremiumDiesel.Model.Constants;
+
+    @section Scripts{
+        <script>
+        $(document).ready(function () {
+
+            $('#customersTable').DataTable(@*{
+                ajax: {
+                    url: '@Api.Products.Delete',
+                    dataSrc: '',
+                },
+                columns: [
+                    {
+                        data: 'name',
+                        render: function (data, type, product) {
+                            var nameLink = @Html.ActionLink("productName", "Edit", new { id = "productId" }, null);
+                            nameLink = nameLink.replace('productName', product.name);
+                            nameLink = nameLink.replace('productId', product.id);
+                            return nameLink;
+                        }
+                    },
+                    {
+                        data: 'notes',
+                    },
+                    {
+                        data: 'actions',
+                        render: function (data, type, product) {
+                            var viewLinkButton = @Html.ActionLink("<span class='fa fa - eye'>", "Details", new { id = "productId" }, null);
+                            viewLinkButton = viewLinkButton.replace('productName', product.name);
+                            viewLinkButton = viewLinkButton.replace('productId', product.id);
+                            return viewLinkButton;
+                        }
+                    }
+                ]
+            }*@);
+
+            $('#customersTable').on('click', '.js-delete', function () {
+                var button = $(this);
+                var primaryKeyId = button.attr('primaryKey');
+
+                bootbox.confirm('Are you sure you wish to delete this customer?', function(result) {
+                    if (result) {
+                        $.ajax({
+                            url: '@Api.ClientCustomers.Delete' + primaryKeyId,
+                            method: "DELETE",
+                            success: function () {
+                                button.parents('tr').remove();
+                            }
+                        });
+                    }
+                });
+
+            });
+        });
+        </script>
+    }

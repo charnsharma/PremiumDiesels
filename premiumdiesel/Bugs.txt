@@ -1,0 +1,2 @@
+- Editing Customer Location throws an exception
+- Editing WorkOrder blanks all the values (except quantity) in the list, but the values are still in the database

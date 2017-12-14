@@ -1,0 +1,139 @@
+﻿@model PremiumDiesel.Web.Models.CustomerViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>New Customer</h2>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <fieldset>
+            @*----------------------------- Customer -----------------------------*@
+            <div class="form-group">
+                @Html.LabelFor(model => model.CustomerDTO.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CustomerDTO.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CustomerDTO.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CustomerDTO.MemberNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CustomerDTO.MemberNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CustomerDTO.MemberNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CustomerDTO.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CustomerDTO.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CustomerDTO.Phone, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CustomerDTO.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CustomerDTO.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CustomerDTO.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </fieldset>
+
+        @*----------------------------- Location -----------------------------*@
+        <fieldset>
+            <h4>Head Office Location</h4>
+            <hr />
+            <div class="form-group">
+                @Html.LabelFor(model => model.HeadOfficeLocationDTO.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.HeadOfficeLocationDTO.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.HeadOfficeLocationDTO.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.HeadOfficeLocationDTO.Type, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.HeadOfficeLocationDTO.Type, new SelectList(ViewBag.LocationTypeList, "Key", "Value", Model.HeadOfficeLocationDTO.Type), "", htmlAttributes: new { @class = "form-control" })
+                    @*@Html.EditorFor(model => model.HeadOfficeLocationDTO.Type, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.ValidationMessageFor(model => model.HeadOfficeLocationDTO.Type, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.HeadOfficeLocationDTO.Address1, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.HeadOfficeLocationDTO.Address1, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.HeadOfficeLocationDTO.Address1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.HeadOfficeLocationDTO.Address2, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.HeadOfficeLocationDTO.Address2, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.HeadOfficeLocationDTO.Address2, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.HeadOfficeLocationDTO.City, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.HeadOfficeLocationDTO.City, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.HeadOfficeLocationDTO.City, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.HeadOfficeLocationDTO.Province, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.HeadOfficeLocationDTO.Province, new SelectList(ViewBag.ProvinceList, "Key", "Value", Model.HeadOfficeLocationDTO.Province), "", htmlAttributes: new { @class = "form-control" })
+                    @*@Html.EditorFor(model => model.HeadOfficeLocationDTO.Province, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.ValidationMessageFor(model => model.HeadOfficeLocationDTO.Province, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.HeadOfficeLocationDTO.PostalCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.HeadOfficeLocationDTO.PostalCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.HeadOfficeLocationDTO.PostalCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.HeadOfficeLocationDTO.Country, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.HeadOfficeLocationDTO.Country, new SelectList(ViewBag.CountryList, "Key", "Value", Model.HeadOfficeLocationDTO.Country), htmlAttributes: new { @class = "form-control" })
+                    @*@Html.EditorFor(model => model.HeadOfficeLocationDTO.Country, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.ValidationMessageFor(model => model.HeadOfficeLocationDTO.Country, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

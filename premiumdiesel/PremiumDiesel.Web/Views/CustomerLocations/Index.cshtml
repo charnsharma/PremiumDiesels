@@ -1,0 +1,161 @@
+﻿@model IEnumerable<PremiumDiesel.Model.DTOs.CustomerLocationDTO>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Locations</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<hr />
+<div class="table-responsive">
+    <table id="locationsTable" class="table table-striped table-hover ">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Customer.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address1)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Address2)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.City)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Province)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PostalCode)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Country)
+                    </th>*@
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @*@if (item.Type == LocationType.HeadOffice)
+                            {*@
+                        @Html.DisplayFor(modelItem => item.Customer.Name)
+                        @* } *@
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address1)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Address2)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Province)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PostalCode)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Country)
+                        </td>*@
+                    <td class="text-right alwaysShow">
+                        @using PremiumDiesel.Web.HtmlHelperExtensions
+
+                        @Ajax.FaViewLinkButton("Details", "CustomerLocations", item.Id)
+                        @Ajax.FaEditLinkButton("Edit", "CustomerLocations", item.Id)
+                        @Ajax.FaDeleteLinkButton(item.Id)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@if (Model.ToList().Count == 0)
+{
+    <div class="alert alert-dismissible alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h4>Warning!</h4>
+        <p>No customers yet.</p>
+    </div>
+
+}
+
+    @*----------------------------------------------------- SCRIPTS -----------------------------------------------------*@
+
+    @using PremiumDiesel.Model.Constants;
+
+    @section Scripts{
+        <script>
+        $(document).ready(function () {
+
+            $('#locationsTable').DataTable(@*{
+                ajax: {
+                    url: '@Api.Products.Delete',
+                    dataSrc: '',
+                },
+                columns: [
+                    {
+                        data: 'name',
+                        render: function (data, type, product) {
+                            var nameLink = @Html.ActionLink("productName", "Edit", new { id = "productId" }, null);
+                            nameLink = nameLink.replace('productName', product.name);
+                            nameLink = nameLink.replace('productId', product.id);
+                            return nameLink;
+                        }
+                    },
+                    {
+                        data: 'notes',
+                    },
+                    {
+                        data: 'actions',
+                        render: function (data, type, product) {
+                            var viewLinkButton = @Html.ActionLink("<span class='fa fa - eye'>", "Details", new { id = "productId" }, null);
+                            viewLinkButton = viewLinkButton.replace('productName', product.name);
+                            viewLinkButton = viewLinkButton.replace('productId', product.id);
+                            return viewLinkButton;
+                        }
+                    }
+                ]
+            }*@);
+
+            $('#locationsTable').on('click', '.js-delete', function () {
+                var button = $(this);
+                var primaryKeyId = button.attr('primaryKey');
+
+                bootbox.confirm('Are you sure you wish to delete this location?', function(result) {
+                    if (result) {
+                        $.ajax({
+                            url: '@Api.CustomerLocations.Delete' + primaryKeyId,
+                            method: "DELETE",
+                            success: function () {
+                                button.parents('tr').remove();
+                            }
+                        });
+                    }
+                });
+
+            });
+        });
+        </script>
+    }
